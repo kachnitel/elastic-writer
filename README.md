@@ -19,7 +19,7 @@ Writer expects that mapping of types and indexes in your Elasticsearch exists. I
         -  `sshPort` *(optional)* - SSH listening port *(default is 22)*
         -  `user` - SSH login
         -  `keys`
-            - `private` - Your private key used for authentication. 
+            - `private` - Your private key used for authentication.
             Note that keys MUST have maintain linebreaks every 72 bytes, according to rfc4716 section 3. When copying the contents of a key file, it is important to replace all true linebreaks with "\n" so that it can be accepted by the configuration editor, and be parsed correctly in order to establish the SSH tunnel successfully.
 - The `tables` section defines database tables, their columns and their data types
     - `file` or `tableId`
@@ -29,6 +29,7 @@ Writer expects that mapping of types and indexes in your Elasticsearch exists. I
     - `type` - type of the data, determines the type in ES,
     - `id` *(optional)* - determines in which column of table is the document's ID/primary key
     - `export` - whether this table shall be exported to ES
+    - `datatypes` - fields that need to be retyped (`integer` and `byte` supported only)
 
 ### Example
 
@@ -45,7 +46,10 @@ Writer expects that mapping of types and indexes in your Elasticsearch exists. I
             "index": "production",
             "type": "products",
             "id": "id",
-            "export": true
+            "export": true,
+            "datatypes": {
+                "id": "integer"
+            }
         }
     ]
 }
