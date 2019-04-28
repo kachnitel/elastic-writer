@@ -25,6 +25,11 @@ class LoadOptions
 	private $bulkSize = self::DEFAULT_BULK_SIZE;
 
 	/**
+	 * @var array
+	 */
+	private $datatypes;
+
+	/**
 	 * @param $value
 	 * @return $this
 	 */
@@ -76,6 +81,16 @@ class LoadOptions
 	public function getBulkSize()
 	{
 		return $this->bulkSize;
+	}
 
+	public function setDataTypes($datatypes)
+	{
+		$this->datatypes = $datatypes;
+		return $this;
+	}
+
+	public function getDataTypes()
+	{
+		return $this->datatypes;
 	}
 }

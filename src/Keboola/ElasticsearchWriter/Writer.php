@@ -90,6 +90,14 @@ class Writer
 				];
 			}
 
+			if ($options->getDataTypes()) {
+				foreach ($options->getDataTypes() as $key => $type) {
+					if (array_key_exists($key, $lineData)) {
+						$lineData[$key] = $this->retype($type, $lineData[$key]);
+					}
+				}
+			}
+
 			$params['body'][] = $lineData;
 
 			if ($i % $options->getBulkSize() == 0) {
@@ -124,7 +132,7 @@ class Writer
 
 					return false;
 				}
-				
+
 				$iBulk++;
 				unset($responses);
 			}
@@ -236,6 +244,17 @@ class Writer
 					$item['error']
 				));
 			}
+		}
+	}
+
+	private function retype(string $type, $value)
+	{
+		switch ($type) {
+			case 'integer':
+			case 'byte':
+				return (int) $value;
+			default:
+				throw new UserException('Unknown data type ' . $type);
 		}
 	}
 }

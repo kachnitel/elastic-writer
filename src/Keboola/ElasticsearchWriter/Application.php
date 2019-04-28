@@ -136,6 +136,10 @@ class Application
 			$options->setIndex($table['index'])
 				->setType($table['type']);
 
+			if (!empty($table['datatypes'])) {
+				$options->setDataTypes($table['datatypes']);
+			}
+
 			if (!empty($parameters['elastic']['bulkSize'])) {
 				$options->setBulkSize($parameters['elastic']['bulkSize']);
 			}
